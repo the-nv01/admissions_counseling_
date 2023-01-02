@@ -10,10 +10,203 @@
   <link rel="stylesheet" href="/styles/personalityForm.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   <style>
-    .chart-container {
+    *{
+      margin:  0;
+      padding:0;
+      outline: none;
+      box-sizing: border-box;
+    }
+    ul li{
+      list-style: none;
+    }
+    a{
+      text-decoration: none;
+    }
+    .results{
+      width: 95%;
+      margin: 20px auto;
+    }
+    .result-content h3{
+      text-align: center;
+      color: rgb(26, 101, 101);
+    }
+    .result-content .result-content__point{
+      /* border: 1px solid red; */
+      width: 70%;
+      height: 15%;
+      margin: 30px auto;
+      display: flex;
+      justify-content: space-between;
+      background-color: rgba(38, 220, 135, 0.312);
+      border-radius:5px ;
+      padding: 10px;
+    }
+    .result-content .result-content__point .point{
+
+      margin-right: 10px;
+    }
+    .result-content .result-content__point .point-content{
+      margin-left: 10px;
+    }
+
+    .result,.result-job--box{
+      background-color: aliceblue;
+
+    }
+    .result h3{
+      color:rgba(220, 138, 38, 0.989) ;
+      padding: 10px 0px;
+    }
+    .result .f-result-content{
+      display: inline-block;
+      width: auto;
+      font-weight: bold;
+      font-size: 5rem;
+      color:rgba(220, 138, 38, 0.989) ;
+
+    }
+    .result .name-result{
+      font-size: 1.5rem;
+      color:rgba(220, 138, 38, 0.989) ;
+    }
+    .result .refer-title{
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: rgb(142, 51, 21);
+    }
+    .result .list-jobs{
+      margin: 30px 0;
+    }
+    .result .list-jobs ul li a{
+      color: rgb(182, 21, 21);
+
+    }
+    .result .list-jobs ul li a:hover{
+      text-decoration: underline;
+    }
+    .result-job--box .title{
+      text-align: center;
+      font-size: 1.5rem;
+      color: rgb(142, 51, 21);
+    }
+    .result-job--box .result-content{
+      margin: 30px 0;
+    }
+    .result-job--box .result-content .job{
+      display: flex;
+      justify-content: space-between;
+      margin: 9px 0;
+
+    }
+    .result-job--box .result-content .job a{
+      font-size: 1.15rem;
+      padding: 5px;
+    }
+    .result-job--box .result-content .job a:nth-child(2){
+      color:rgb(102, 7, 7)
+    }
+    .result-job--box .result-content .job a:nth-child(1){
+      text-decoration: underline;
+    }
+    .result-job--box .result-content .job a:nth-child(2):hover{
+      color: red;
+      text-decoration: underline;
+    }
+
+
+    .consultings{
+      /* margin: 0 auto; */
       width: 50%;
-      height: 50%;
-      margin: auto;
+      height: 300px;
+      background-color: rgba(175, 234, 214, 0.377);
+      border-radius: 20px;
+      position: absolute;
+      top: 0%;
+      left: 50%;
+      transform: translate(-50%,-50%) scale(0.1);
+      visibility: hidden;
+      transition: transform 0.4s,top 0.4s;
+    }
+    .consultings .consultings-content{
+      margin: 10px 0;
+      padding: 20px 20px;
+    }
+    .consultings h2{
+      text-align: center;
+      text-transform: uppercase;
+      color: rgb(52, 60, 221);
+      text-shadow:    1px 1px 3px rgba(54, 61, 202, 0.681) ;
+      margin-bottom: 20px;
+    }
+    .consulting .input-group{
+      display: flex;
+      margin-top: 10px;
+    }
+    .consulting .input-group:last-child{
+      margin-bottom: 10px;
+    }
+    .group-input{
+      width: 60%;
+      height: 30px;
+      margin-left: 1%;
+      border: 2px solid rgba(109, 23, 23, 0.385);
+      border-radius: 15px;
+      padding-left: 10px;
+      background-color: rgba(166, 179, 175, 0.114);
+      color: rgb(4, 28, 5);
+      font-size: 1rem;
+    }
+    input::placeholder{
+      color: rgb(83, 45, 45);
+      /* background-color: antiquewhite; */
+      font-size: 1rem;
+    }
+
+    .input-group-text{
+      display: flex;
+      color: rgb(47, 50, 19);
+      text-shadow: 1px 1px 1px rgba(219, 31, 31, 0.336);
+      width: 25%;
+      font-weight: bold;
+      text-align: right;
+      justify-content: end;
+      align-items: center;
+    }
+
+    .btn{
+
+      border-radius: 10px;
+      border: 2px solid rgba(152, 9, 9, 0.482);
+      width: 40%;
+      height: 30px;
+      margin-top: 30px;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: rgba(137, 22, 12, 0.682);
+      background-color: rgba(185, 53, 53, 0.221);
+      display: block;
+      margin: 30px auto;
+      cursor: pointer;
+    }
+    .btn-close{
+      position: absolute;
+      border: 1px solid transparent;
+      background-color: transparent;
+      border-radius: 50%;
+      top: 2%;
+      right: 3%;
+      cursor: pointer;
+      font-size: 2rem;
+    }
+    .btn-close:hover{
+      color: rgb(176, 14, 14);
+    }
+
+
+    .open-popup{
+      visibility: visible;
+      top: 50%;
+      transform: translate(-50%,-50%) scale(1);
     }
   </style>
 </head>
@@ -69,7 +262,7 @@
         Kiểu người
       </h3>
       <div class="name-result" th:text="${type.typeName}"></div>
-      <p th:text="${type.typeContent}"></p>
+      <p th:text="${type.typeContent}" style="white-space: pre-line;"></p>
       <br>
       <h4 class="refer-title">Những ngành nghề nên ưu tiên tham khảo trước:</h4>
       <div class="list-jobs">

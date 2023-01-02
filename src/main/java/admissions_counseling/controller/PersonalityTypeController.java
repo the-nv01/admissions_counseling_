@@ -3,7 +3,6 @@ package admissions_counseling.controller;
 import admissions_counseling.model.Block;
 import admissions_counseling.model.PersonalityType;
 import admissions_counseling.model.Question;
-import admissions_counseling.model.QuestionList;
 import admissions_counseling.service.CareerService;
 import admissions_counseling.service.PersonalityTypeService;
 import admissions_counseling.service.QuestionService;
@@ -30,9 +29,7 @@ public class PersonalityTypeController {
     public ModelAndView initView() {
         ModelAndView modelAndView = new ModelAndView("PersonalityForm");
 
-        QuestionList questionList = new QuestionList();
-        questionList.setQuestions(questionService.getAllQuestion());
-        List<Question> questions = questionList.getQuestions();
+        List<Question> questions = questionService.getAllQuestion();
         List<PersonalityType> typeList = personalityTypeService.getAllPersonalityType();
 
         int questionStat = 0;

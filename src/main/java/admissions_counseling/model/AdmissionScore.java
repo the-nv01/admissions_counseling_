@@ -26,5 +26,5 @@ public class AdmissionScore {
     private String year;
 
     @Column
-    private Integer score;
+    private Float score;
 }
