@@ -27,11 +27,12 @@
 <body>
 <div class="question-box">
     <div class="container">
-        <form action="/your-persionality-type" method="get" th:object="${questionList}">
+        <form action="/your-personality-type" method="get" th:object="${questionList}">
+<!--            <input type="hidden" th:field="${questionList.isCheck}" th:value="0">-->
 
-            <div class="form-question" th:each="question : ${questionList}">
+            <div class="form-question" th:each="question : ${questionList.questions}">
 
-                <input type="hidden" th:field="${question.answer}" id="set-value">
+                <input type="hidden" th:field="${question.answer}" id="set-value" th:value="0">
 
                 <span class="text-group-box" th:text="${question.questionId} + '. '+ ${question.questionContent}">
                 </span>
@@ -68,11 +69,10 @@
 </div>
 <script th:inline="javascript">
     function answer(value) {
+        let answer = value || 0
         console.log(value);
-        jQuery(document).ready(function ($) {
-            $(".set-value").val(value);
-        });
-        debugger;
+        console.log(answer)
+        document.getElementById('set-value').value=answer;
     }
 </script>
 </body>

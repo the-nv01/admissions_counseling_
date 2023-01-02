@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin_app}" xml:lang="ja" lang="ja" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Personality</title>
+  <link rel="stylesheet" href="/styles/personalityForm.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <style>
+    .chart-container {
+      width: 50%;
+      height: 50%;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+<div class="consultings" id="popup">
+  <button class="btn-close" onclick="ClosePopup()"> &times;</button>
+  <div class="consultings-content">
+    <h2>Vui lòng điền thông tin để được hỗ trợ tư vấn!</h2>
+    <form action="/counseling-result" th:object="${estimateScore}">
+      <input type="hidden" th:field="${estimateScore.careerChose}" id="career-name-value" th:value="0">
+      <div class="consulting">
+        <div class="point-consulting input-group">
+          <label class="input-group-text">
+            Điểm thi:
+          </label>
+          <input class="group-input" type="text" id="point" placeholder="Nhập điểm thi" th:field="${estimateScore.score}">
+        </div>
+        <div class="block-consulting input-group">
+          <label for="block" class="input-group-text">
+            Khối thi:
+          </label>
+          <select class="group-input" id="block" th:field="${estimateScore.blockName}">
+            <option selected value="" hidden>---Chọn tổ hợp thi---</option>
+            <option value="0">A</option>
+            <option value="1">B</option>
+            <option value="2">C</option>
+            <option value="3">D</option>
+            <option value="4">A1</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn ">Tìm kiếm thông tin</button>
+    </form>
+  </div>
+</div>
+
+<div class="results">
+  <div class="card chart-container">
+    <canvas id="myChart"></canvas>
+  </div>
+  <div class="result-box">
+    <div class="result-content">
+      <h3 th:text="'Đây là kiểu người nổi nhất của bạn: ' + ${type.typeName}">
+      </h3>
+      <div class="result-content__point">
+        <span class="point-content">Tổng điểm:</span>
+        <span class="point" th:text="${type.totalAnswer}"></span>
+      </div>
+    </div>
+    <div class="result">
+      <h3>
+        Kiểu người
+      </h3>
+      <div class="name-result" th:text="${type.typeName}"></div>
+      <p th:text="${type.typeContent}"></p>
+      <br>
+      <h4 class="refer-title">Những ngành nghề nên ưu tiên tham khảo trước:</h4>
+      <div class="list-jobs">
+        <ul th:each="career: ${careerList}">
+          <li>
+            <a href="#" data-toggle="modal" th:text="${career.careerName} + ': '" th:onclick="|chooseCareer(${career.careerId})|"></a>
+            <p th:text="${career.careerList}"></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script th:inline="javascript">
+    let xValues = [];
+    let yValues = [];
+    const typeList = [[${typeList}]] || []
+    typeList.forEach(type => {
+      xValues.push(type.typeName)
+      yValues.push(type.totalAnswer)
+    });
+    var barColors = ["red", "green", "blue", "orange", "brown", "purple"];
+
+    new Chart("myChart", {
+      type: "bar",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {display: false},
+        title: {
+          display: true,
+          text: "YOUR PERSONALITY"
+        }
+      }
+    });
+
+    function chooseCareer(value) {
+      const careerChose = value || 0
+      console.log(careerChose)
+      document.getElementById('career-name-value').value=careerChose;
+    }
+  </script>
+</div>
+
+</body>
+<script>
+  const OpenPopup=()=>{
+    popup.classList.add('open-popup')
+  }
+
+  const ClosePopup=()=>{
+    popup.classList.remove('open-popup')
+  }
+
+  var toggleModal=document.querySelectorAll('[data-toggle="modal"]');
+  console.log(toggleModal);
+
+  toggleModal.forEach((modal)=>{
+    modal.addEventListener('click',OpenPopup)
+  })
+  document.addEventListener('keyup', function(e){
+    if (e.key === 'Escape'){
+      ClosePopup();
+    }
+  });
+
+</script>
+</html>

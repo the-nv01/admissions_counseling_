@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CareerRepository extends JpaRepository<Question, Integer> {
+public interface CareerRepository extends JpaRepository<Career, Integer> {
     List<Career> findAllBy();
+
+    List<Career> findByTypeIdOrderByTypeIdAsc(Integer typeId);
+
+    Career findByCareerId(Integer careerId);
 }

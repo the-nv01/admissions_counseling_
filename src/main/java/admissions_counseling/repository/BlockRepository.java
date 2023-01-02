@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BlockRepository extends JpaRepository<Question, Integer> {
+public interface BlockRepository extends JpaRepository<Block, Integer> {
     List<Block> findAllBy();
 }

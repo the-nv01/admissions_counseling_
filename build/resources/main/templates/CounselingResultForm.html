@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin_app}" xml:lang="ja" lang="ja" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/ketqua.css">
+</head>
+
+<body>
+<div class="result-table">
+  <h1>Kết quả</h1>
+  <div class="table-jobs">
+    <div class="title-content">
+      <span th:text="${careerName}"></span>
+
+    </div>
+    <table th:each="university, universityStat : ${universityList}">
+      <thead>
+      <tr>
+        <th>Stt</th>
+        <th>Trường</th>
+        <th>Điểm</th>
+        <th>Đánh giá</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td th:text="${universityStat.index + 1}"></td>
+          <td th:text="${university.universityName}"></td>
+          <td th:text="${university.averageScore}"></td>
+          <td>
+            <label th:text="${university.collegePassing} + '%'"></label>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+    </table>
+  </div>
+</div>
+</body>
+
+</html>

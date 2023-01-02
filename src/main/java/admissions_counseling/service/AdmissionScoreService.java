@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface AdmissionScoreService {
     List<AdmissionScore> getAllAdmissionScore();
+
+    List<AdmissionScore> getAdmissionByUniversityIdAndBlockId(Integer universityId, Integer blockId);
 }

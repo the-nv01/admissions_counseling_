@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UniversityService {
     List<University> getAllUniversity();
+
+    public List<University> getUniversityByCareerId(Integer careerId);
 }

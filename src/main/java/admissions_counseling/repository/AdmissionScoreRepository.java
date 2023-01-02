@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AdmissionScoreRepository extends JpaRepository<Question, Integer> {
+public interface AdmissionScoreRepository extends JpaRepository<AdmissionScore, Integer> {
     List<AdmissionScore> findAllBy();
+
+    List<AdmissionScore> findAllByUniversityIdAndBlockId(Integer universityId, Integer blockId);
 }

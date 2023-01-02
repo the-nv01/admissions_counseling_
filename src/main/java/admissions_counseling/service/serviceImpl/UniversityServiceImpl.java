@@ -17,4 +17,9 @@ public class UniversityServiceImpl implements UniversityService {
     public List<University> getAllUniversity() {
         return universityRepository.findAllBy();
     }
+
+    @Override
+    public List<University> getUniversityByCareerId(Integer careerId) {
+        return universityRepository.findAllByCareerId(careerId);
+    }
 }

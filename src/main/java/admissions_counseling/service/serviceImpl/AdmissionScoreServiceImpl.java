@@ -18,4 +18,9 @@ public class AdmissionScoreServiceImpl implements AdmissionScoreService {
     public List<AdmissionScore> getAllAdmissionScore() {
         return admissionScoreRepository.findAllBy();
     }
+
+    @Override
+    public List<AdmissionScore> getAdmissionByUniversityIdAndBlockId(Integer universityId, Integer blockId) {
+        return admissionScoreRepository.findAllByUniversityIdAndBlockId(universityId, blockId);
+    }
 }

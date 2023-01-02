@@ -17,4 +17,14 @@ public class CareerServiceImpl implements CareerService {
     public List<Career> getAllCareer() {
         return careerRepository.findAllBy();
     }
+
+    @Override
+    public List<Career> getCareerByTypeId(Integer typeId) {
+        return careerRepository.findByTypeIdOrderByTypeIdAsc(typeId);
+    }
+
+    @Override
+    public Career getCareerById(Integer careerId) {
+        return careerRepository.findByCareerId(careerId);
+    }
 }
