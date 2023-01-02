@@ -1,6 +1,5 @@
 package admissions_counseling.repository;
 
-import admissions_counseling.model.Career;
 import admissions_counseling.model.Question;
 import admissions_counseling.model.University;
 import org.springframework.data.jpa.repository.JpaRepository;

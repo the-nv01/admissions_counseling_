@@ -29,9 +29,9 @@
     <div class="container">
         <form action="/your-persionality-type" method="get" th:object="${questionList}">
 
-            <div class="form-question" th:each="question, questionStat : ${questionList}">
+            <div class="form-question" th:each="question : ${questionList}">
 
-                <input type="hidden" th:field="${questionList[__${questionStat.index}__].answer}" id="set-value">
+                <input type="hidden" th:field="${question.answer}" id="set-value">
 
                 <span class="text-group-box" th:text="${question.questionId} + '. '+ ${question.questionContent}">
                 </span>
@@ -70,7 +70,7 @@
     function answer(value) {
         console.log(value);
         jQuery(document).ready(function ($) {
-            $("#set-value").val(value);
+            $(".set-value").val(value);
         });
         debugger;
     }
