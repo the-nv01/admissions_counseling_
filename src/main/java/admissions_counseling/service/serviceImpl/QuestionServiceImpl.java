@@ -18,7 +18,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public List<Question> getAllQuestion() {
-        Map<String, List> result = new HashMap<>();
         List<Question> questionList = questionRepository.findAllByOrderByTypeIdAscQuestionIdAsc();
         for (Question question : questionList) {
             getQuestionOrdinal(question);
@@ -31,6 +30,6 @@ public class QuestionServiceImpl implements QuestionService {
         while (questionId > 9) {
             questionId -= 9;
         }
-        question.setQuestionId(questionId);
+        question.setAutoNo(questionId);
     }
 }

@@ -1,5 +1,6 @@
 package admissions_counseling.controller;
 
+import admissions_counseling.model.QuestionList;
 import admissions_counseling.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,10 @@ public class QuestionController {
     @GetMapping("")
     public ModelAndView initView() {
         ModelAndView modelAndView = new ModelAndView("QuestionForm");
-        modelAndView.addObject("questionList", questionService.getAllQuestion());
+        QuestionList questionList = new QuestionList();
+        questionList.setQuestionList(questionService.getAllQuestion());
+        modelAndView.addObject("questionList", questionList);
+//        modelAndView.addObject("answerList", new QuestionList());
         return modelAndView;
     }
 
