@@ -29,4 +29,6 @@ public class Question {
 
     @Column
     private String answer;
+
+    private Integer autoNo = 0;
 }

@@ -3,13 +3,17 @@ package admissions_counseling.controller;
 import admissions_counseling.model.Block;
 import admissions_counseling.model.PersonalityType;
 import admissions_counseling.model.Question;
+import admissions_counseling.model.QuestionList;
 import admissions_counseling.service.CareerService;
 import admissions_counseling.service.PersonalityTypeService;
 import admissions_counseling.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -25,18 +29,17 @@ public class PersonalityTypeController {
 
     private final CareerService careerService;
 
-    @GetMapping("")
-    public ModelAndView initView() {
+    @PostMapping("")
+    public ModelAndView initView(@ModelAttribute("answerList") QuestionList questionList) {
         ModelAndView modelAndView = new ModelAndView("PersonalityForm");
 
-        List<Question> questions = questionService.getAllQuestion();
+        List<Question> questions = questionList.getQuestionList();
         List<PersonalityType> typeList = personalityTypeService.getAllPersonalityType();
 
         int questionStat = 0;
         while (questionStat/6 < 6) {
             typeList.get(questionStat/6).setTotalAnswer(
-                    typeList.get(questionStat/6).getTotalAnswer() + questionStat);
-//                            Integer.parseInt(questions.get(questionStat).getAnswer()));
+                    typeList.get(questionStat/6).getTotalAnswer() + Integer.parseInt(questions.get(questionStat).getAnswer()));
             questionStat ++;
         }
 
