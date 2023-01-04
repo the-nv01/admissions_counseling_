@@ -17,4 +17,9 @@ public class BlockServiceImpl implements BlockService {
     public List<Block> getAllBlock() {
         return blockRepository.findAllBy();
     }
+
+    @Override
+    public Block getBlockByName(String blockName) {
+        return blockRepository.getBlockByBlockName(blockName);
+    }
 }

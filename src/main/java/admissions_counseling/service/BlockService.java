@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface BlockService {
     List<Block> getAllBlock();
+
+    Block getBlockByName(String blockName);
 }

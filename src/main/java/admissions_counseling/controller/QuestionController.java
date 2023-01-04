@@ -21,7 +21,7 @@ public class QuestionController {
         QuestionList questionList = new QuestionList();
         questionList.setQuestionList(questionService.getAllQuestion());
         modelAndView.addObject("questionList", questionList);
-//        modelAndView.addObject("answerList", new QuestionList());
+        modelAndView.addObject("autoNo", 1);
         return modelAndView;
     }
 

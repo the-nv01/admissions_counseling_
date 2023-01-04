@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface BlockRepository extends JpaRepository<Block, Integer> {
     List<Block> findAllBy();
+
+    Block getBlockByBlockName(String blockName);
 }

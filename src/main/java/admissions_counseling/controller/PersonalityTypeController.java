@@ -6,14 +6,11 @@ import admissions_counseling.model.Question;
 import admissions_counseling.model.QuestionList;
 import admissions_counseling.service.CareerService;
 import admissions_counseling.service.PersonalityTypeService;
-import admissions_counseling.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -25,12 +22,11 @@ public class PersonalityTypeController {
 
     private final PersonalityTypeService personalityTypeService;
 
-    private final QuestionService questionService;
-
     private final CareerService careerService;
 
     @PostMapping("")
     public ModelAndView initView(@ModelAttribute("answerList") QuestionList questionList) {
+
         ModelAndView modelAndView = new ModelAndView("PersonalityForm");
 
         List<Question> questions = questionList.getQuestionList();
@@ -55,6 +51,12 @@ public class PersonalityTypeController {
                 personalityType = type;
             }
         }
+
+        if (maxQuestionScore < 30) {
+            modelAndView.setViewName("PersonalityErrorForm");
+        }
+
+        modelAndView.addObject("answerList", questionList);
         modelAndView.addObject("type", personalityType);
         modelAndView.addObject("typeList", typeList);
         modelAndView.addObject("careerList", careerService.getCareerByTypeId(personalityType.getTypeId()));

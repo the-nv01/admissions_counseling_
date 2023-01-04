@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Personality</title>
+  <title>YOUR PERSONALITY</title>
   <link rel="stylesheet" href="/styles/personalityForm.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   <style>
@@ -240,11 +240,11 @@
           </label>
           <select class="group-input" id="block" th:field="${estimateScore.blockName}">
             <option selected value="" hidden>---Chọn tổ hợp thi---</option>
-            <option value="0">A</option>
-            <option value="1">B</option>
-            <option value="2">C</option>
-            <option value="3">D</option>
-            <option value="4">A1</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="A1">A1</option>
           </select>
         </div>
       </div>
@@ -293,6 +293,7 @@
         xValues.push(type.typeName)
         yValues.push(type.totalAnswer)
       });
+      yValues.push(0, 100)
       var barColors = ["red", "green", "blue", "orange", "brown", "purple"];
 
       new Chart("myChart", {

@@ -7,4 +7,6 @@ import java.util.List;
 @Data
 public class QuestionList {
     List<Question> questionList;
+
+    Integer autoNo;
 }
