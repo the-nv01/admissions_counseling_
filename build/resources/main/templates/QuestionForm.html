@@ -9,6 +9,9 @@
     <title>Answer the question</title>
     <link rel="stylesheet" href="/styles/style.css">
     <style>
+        body{
+            font-family: system-ui;
+        }
         *{
             margin: 0;
             padding: 0;
@@ -155,42 +158,39 @@
 <div class="question-box">
     <div class="container">
         <form th:action="@{/your-personality-type}" method="post" th:object="${questionList}">
+            <div class="form-question">
+                <div class="question-group-text" th:each="question : ${questionList.questionList}">
+                        <input type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].questionId}">
+                        <input type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].typeId}">
+                        <input type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].questionContent}">
+                        <input type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].questionWeight}">
+                        <input type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].autoNo}">
+                        <input type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].answer}" th:id="'set-value' + ${question.questionId}">
 
-            <div class="question-group-text" th:each="question : ${questionList.questionList}">
-
-<!--                <div type="hidden" th:field="${question.answer}" id="set-value"></div>-->
-
-                <input type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].questionId}">
-                <input type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].typeId}">
-                <input type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].questionContent}">
-                <input type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].questionWeight}">
-                <input type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].autoNo}">
-                <input type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].answer}" th:id="'set-value' + ${question.questionId}">
-<!--                <div type="hidden" th:field="${questionList.questionList[__${questionStat.index}__].answer}" th:id="'set-value' + ${question.questionId}"></div>-->
-
-                <span class="text-group-box" th:text="${question.autoNo} + '. '+ ${question.questionContent}">
-                </span>
-                <div class="checkbox-question">
-                    <div class="answer-box">
-                        <input type="radio" th:name="${question.questionId}" th:id="${question.questionId}" th:onclick="|answer(${question.questionId}, '0')|">
-                        <label th:for="${question.questionId}">0</label>
-                    </div>
-                    <div class="answer-box">
-                        <input type="radio" th:name="${question.questionId}" th:id="${question.questionId+54}" th:onclick="|answer(${question.questionId}, '1')|">
-                        <label th:for="${question.questionId+54}">1</label>
-                    </div>
-                    <div class="answer-box">
-                        <input type="radio" th:name="${question.questionId}" th:id="${question.questionId+108}" th:onclick="|answer(${question.questionId}, '2')|">
-                        <label th:for="${question.questionId+108}">2</label>
-                    </div>
-                    <div class="answer-box">
-                        <input type="radio" th:name="${question.questionId}" th:id="${question.questionId+162}" th:onclick="|answer(${question.questionId}, '3')|">
-                        <label th:for="${question.questionId+162}">3</label>
-                    </div>
-                    <div class="answer-box">
-                        <input type="radio" th:name="${question.questionId}" th:id="${question.questionId+216}" th:onclick="|answer(${question.questionId}, '4')|">
-                        <label th:for="${question.questionId+216}">4</label>
-                    </div>
+                        <span class="text-group-box" th:text="${question.autoNo} + '. '+ ${question.questionContent}">
+                        </span>
+                        <div class="checkbox-question">
+                            <div class="answer-box">
+                                <input type="radio" th:name="${question.questionId}" th:id="${question.questionId}" th:onclick="|answer(${question.questionId}, '0')|">
+                                <label th:for="${question.questionId}">0</label>
+                            </div>
+                            <div class="answer-box">
+                                <input type="radio" th:name="${question.questionId}" th:id="${question.questionId+54}" th:onclick="|answer(${question.questionId}, '1')|">
+                                <label th:for="${question.questionId+54}">1</label>
+                            </div>
+                            <div class="answer-box">
+                                <input type="radio" th:name="${question.questionId}" th:id="${question.questionId+108}" th:onclick="|answer(${question.questionId}, '2')|">
+                                <label th:for="${question.questionId+108}">2</label>
+                            </div>
+                            <div class="answer-box">
+                                <input type="radio" th:name="${question.questionId}" th:id="${question.questionId+162}" th:onclick="|answer(${question.questionId}, '3')|">
+                                <label th:for="${question.questionId+162}">3</label>
+                            </div>
+                            <div class="answer-box">
+                                <input type="radio" th:name="${question.questionId}" th:id="${question.questionId+216}" th:onclick="|answer(${question.questionId}, '4')|">
+                                <label th:for="${question.questionId+216}">4</label>
+                            </div>
+                        </div>
                 </div>
             </div>
             <div class="submit-box">
@@ -206,6 +206,8 @@
         let answer = value || 0
         document.getElementById('set-value' + id).value=answer;
     }
+
+    console.log(document.querySelector("form .form-question").innerHTML)
 </script>
 </body>
 </html>

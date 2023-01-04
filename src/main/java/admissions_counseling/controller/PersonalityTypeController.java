@@ -37,10 +37,14 @@ public class PersonalityTypeController {
         List<PersonalityType> typeList = personalityTypeService.getAllPersonalityType();
 
         int questionStat = 0;
-        while (questionStat/6 < 6) {
-            typeList.get(questionStat/6).setTotalAnswer(
-                    typeList.get(questionStat/6).getTotalAnswer() + Integer.parseInt(questions.get(questionStat).getAnswer()));
+        while (questionStat/9 < 6) {
+            typeList.get(questionStat/9).setTotalAnswer(typeList.get(questionStat/9).getTotalAnswer() +
+                    Integer.parseInt(questions.get(questionStat).getAnswer()) *
+                    questions.get(questionStat).getQuestionWeight());
             questionStat ++;
+        }
+        for (PersonalityType type : typeList) {
+            type.setTotalAnswer(type.getTotalAnswer() * 100 / 180);
         }
 
         PersonalityType personalityType = new PersonalityType();

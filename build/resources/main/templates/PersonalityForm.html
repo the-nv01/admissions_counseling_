@@ -208,6 +208,15 @@
       top: 50%;
       transform: translate(-50%,-50%) scale(1);
     }
+
+    .chart-container{
+      width: 50%;
+      height: auto;
+      margin: 30px auto;
+    }
+    body{
+      font-family: system-ui;
+    }
   </style>
 </head>
 
@@ -275,40 +284,43 @@
       </div>
     </div>
   </div>
-  <script th:inline="javascript">
-    let xValues = [];
-    let yValues = [];
-    const typeList = [[${typeList}]] || []
-    typeList.forEach(type => {
-      xValues.push(type.typeName)
-      yValues.push(type.totalAnswer)
-    });
-    var barColors = ["red", "green", "blue", "orange", "brown", "purple"];
 
-    new Chart("myChart", {
-      type: "bar",
-      data: {
-        labels: xValues,
-        datasets: [{
-          backgroundColor: barColors,
-          data: yValues
-        }]
-      },
-      options: {
-        legend: {display: false},
-        title: {
-          display: true,
-          text: "YOUR PERSONALITY"
+    <script th:inline="javascript">
+      let xValues = [];
+      let yValues = [];
+      const typeList = [[${typeList}]] || []
+      typeList.forEach(type => {
+        xValues.push(type.typeName)
+        yValues.push(type.totalAnswer)
+      });
+      var barColors = ["red", "green", "blue", "orange", "brown", "purple"];
+
+      new Chart("myChart", {
+        type: "bar",
+        data: {
+          labels: xValues,
+          datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+          }]
+        },
+        options: {
+          legend: {display: false},
+          title: {
+            display: true,
+            text: "YOUR PERSONALITY"
+          }
         }
-      }
-    });
+      });
 
-    function chooseCareer(value) {
-      const careerChose = value || 0
-      console.log(careerChose)
-      document.getElementById('career-name-value').value=careerChose;
-    }
-  </script>
+      function chooseCareer(value) {
+        const careerChose = value || 0
+        console.log(careerChose)
+        document.getElementById('career-name-value').value=careerChose;
+      }
+    </script>
+
+
 </div>
 
 </body>
